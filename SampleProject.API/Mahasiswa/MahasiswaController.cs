@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleProject.API.Mahasiswa
 {
+    //Percobaan 1
     [Route("api/mahasiswa")]
     [ApiController]
     public class MahasiswaController
