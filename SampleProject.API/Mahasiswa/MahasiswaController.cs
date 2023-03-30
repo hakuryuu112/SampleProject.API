@@ -1,8 +1,11 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SampleProject.Application.Mahasiswa;
+using SampleProject.Application.Mahasiswa.GetMahasiswa;
 using SampleProject.Application.Mahasiswa.RegisterMahasiswa;
 
 namespace SampleProject.API.Mahasiswa
@@ -17,6 +20,16 @@ namespace SampleProject.API.Mahasiswa
         public MahasiswaController(IMediator mediator)
         {
             this._mediator = mediator;
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(List<MahasiswaDTO>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetMahasiswa(Guid id)
+        {
+            var getMahasiswa = await _mediator.Send(new GetMahasiswaQuery(id));
+
+            return Ok(getMahasiswa);
         }
 
         // Add Create in Table dbo.Mahasiswa
