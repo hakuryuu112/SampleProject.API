@@ -3,6 +3,7 @@
     internal sealed class SchemaNames
     {
         internal const string Orders = "orders";
+        internal const string dbo = "dbo";
         internal const string Application = "app";
         internal const string Payments = "payments";
     }

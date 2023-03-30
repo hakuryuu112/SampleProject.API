@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SampleProject.Domain.Customers;
+using SampleProject.Domain.Mahasiswa;
 using SampleProject.Domain.Payments;
 using SampleProject.Domain.Products;
 using SampleProject.Infrastructure.Processing.InternalCommands;
@@ -10,6 +11,7 @@ namespace SampleProject.Infrastructure.Database
     public class OrdersContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Mahasiswas> Mahasiswa { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OutboxMessage> OutboxMessages { get; set; }
 

@@ -7,7 +7,9 @@ using SampleProject.Domain.Customers.Orders;
 using SampleProject.Domain.Payments;
 using SampleProject.Domain.Products;
 using SampleProject.Domain.SeedWork;
+using SampleProject.Domain.Mahasiswa;
 using SampleProject.Infrastructure.Domain;
+using SampleProject.Infrastructure.Domain.Mahasiswa;
 using SampleProject.Infrastructure.Domain.Customers;
 using SampleProject.Infrastructure.Domain.Payments;
 using SampleProject.Infrastructure.Domain.Products;
@@ -38,6 +40,11 @@ namespace SampleProject.Infrastructure.Database
 
             builder.RegisterType<CustomerRepository>()
                 .As<ICustomerRepository>()
+                .InstancePerLifetimeScope();
+
+            //Mahasiswa
+            builder.RegisterType<MahasiswaRepository>()
+                .As<IMahasiswaRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductRepository>()

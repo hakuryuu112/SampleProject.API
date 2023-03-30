@@ -1,17 +1,41 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using SampleProject.Application.Mahasiswa;
+using SampleProject.Application.Mahasiswa.RegisterMahasiswa;
 
 namespace SampleProject.API.Mahasiswa
 {
+    //Percobaan 1
     [Route("api/mahasiswa")]
     [ApiController]
-    public class MahasiswaController
+    public class MahasiswaController : Controller
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
+
+        public MahasiswaController(IMediator mediator)
+        {
+            this._mediator = mediator;
+        }
+
+        // Add Create in Table dbo.Mahasiswa
+        [Route("")]
+        [HttpPost]
+        [ProducesResponseType(typeof(MahasiswaDTO), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> RegisterMahasiswa([FromBody]RegisterMahasiswaRequest request)
+        {
+            var mahasiswa = await _mediator.Send(new RegisterMahasiswaCommand(
+                request.name, 
+                request.nim, 
+                request.sex, 
+                request.city,
+                request.country, 
+                request.date, 
+                request.address
+                ));
+
+            return Created(string.Empty, mahasiswa);
+        }
     }
 }
