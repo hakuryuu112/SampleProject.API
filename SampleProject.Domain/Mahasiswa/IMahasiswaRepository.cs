@@ -10,5 +10,6 @@ namespace SampleProject.Domain.Mahasiswa
         Task<Mahasiswas> GetByIdAsync(MahasiswaId id);
 
         Task AddAsync(Mahasiswas mahasiswas);
+        Task DeleteAsync(Mahasiswas mahasiswas);
     }
 }

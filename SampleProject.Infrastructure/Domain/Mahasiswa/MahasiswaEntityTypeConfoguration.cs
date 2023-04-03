@@ -14,7 +14,7 @@ namespace SampleProject.Infrastructure.Domain.Mahasiswa
         {
             builder.ToTable("Mahasiswa", SchemaNames.dbo);
 
-            builder.HasKey(b => b.Id);
+            builder.HasKey(b => b.id);
 
             builder.Property("_name").HasColumnName("name");
             builder.Property("_nim").HasColumnName("nim");

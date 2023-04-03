@@ -22,9 +22,16 @@ namespace SampleProject.Infrastructure.Domain.Mahasiswa
             await this._context.Mahasiswa.AddAsync(mahasiswas);
         }
 
+        public async Task DeleteAsync(Mahasiswas mahasiswas)
+        {
+            var mahasiswaDelete = await this._context.Mahasiswa.FindAsync(mahasiswas.id);
+
+            _context.Mahasiswa.Remove(mahasiswaDelete);
+        }
+
         public async Task<Mahasiswas> GetByIdAsync(MahasiswaId id)
         {
-            return await this._context.Mahasiswa.SingleAsync(x => x.Id == id);
+            return await this._context.Mahasiswa.SingleAsync(x => x.id == id);
         }
     }
 }
