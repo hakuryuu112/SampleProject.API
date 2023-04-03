@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SampleProject.Application.Mahasiswa;
+using SampleProject.Application.Mahasiswa.ChangeMahasiswa;
 using SampleProject.Application.Mahasiswa.GetMahasiswa;
 using SampleProject.Application.Mahasiswa.RegisterMahasiswa;
+using SampleProject.Application.Mahasiswa.RemoveMahasiswa;
 
 namespace SampleProject.API.Mahasiswa
 {
@@ -38,17 +40,31 @@ namespace SampleProject.API.Mahasiswa
         [ProducesResponseType(typeof(MahasiswaDTO), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> RegisterMahasiswa([FromBody]RegisterMahasiswaRequest request)
         {
-            var mahasiswa = await _mediator.Send(new RegisterMahasiswaCommand(
-                request.name, 
-                request.nim, 
-                request.sex, 
-                request.city,
-                request.country, 
-                request.date, 
-                request.address
-                ));
+            var mahasiswa = await _mediator.Send(new RegisterMahasiswaCommand(request.name, request.nim, request.sex, request.city, request.country, request.date, request.address));
 
             return Created(string.Empty, mahasiswa);
+        }
+
+        [Route("{id}")]
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> ChangeMahasiswa(
+        [FromRoute]Guid id, 
+        [FromBody]MahasiswaRequest request)
+        {
+            await _mediator.Send(new ChangeMahasiswaCommand(id, request.name, request.nim, request.sex, request.city, request.country, request.date, request.address));
+
+            return Ok();
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        [ProducesResponseType(typeof(List<MahasiswaDTO>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> RemoveMahasiswa([FromRoute]Guid id)
+        {
+            await _mediator.Send(new DeleteMahasiswaCommand(id));
+
+            return Ok();
         }
     }
 }

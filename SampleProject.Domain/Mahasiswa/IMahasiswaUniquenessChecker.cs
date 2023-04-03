@@ -6,6 +6,6 @@ namespace SampleProject.Domain.Mahasiswa
 {
     public interface IMahasiswaUniquenessChecker
     {
-        bool IsUnique(string mahasiswaNim);
+        bool IsUnique(int mahasiswaNim);
     }
 }
