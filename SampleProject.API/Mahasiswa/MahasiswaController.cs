@@ -56,7 +56,7 @@ namespace SampleProject.API.Mahasiswa
 
             return Ok();
         }
-
+        //API delete
         [Route("{id}")]
         [HttpDelete]
         [ProducesResponseType(typeof(List<MahasiswaDTO>), (int)HttpStatusCode.OK)]
